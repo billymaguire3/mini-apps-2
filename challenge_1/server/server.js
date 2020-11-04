@@ -8,6 +8,10 @@ const port = 3333;
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
+// server.get('/events', (req, res) => {
+//   res.jsonp
+// });
+
 server.use(router);
 server.listen(port, () => {
   console.log(`Historical Events Finder App Listening at http://localhost:${port}`);
