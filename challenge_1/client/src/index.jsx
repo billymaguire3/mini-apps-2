@@ -1,4 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HistoricalFinder from './components/HistoricalFinder.jsx';
 
-ReactDOM.render(<p>Hello from index.jsx</p>, document.getElementById('app'));
+ReactDOM.render(<HistoricalFinder />, document.getElementById('app'));
