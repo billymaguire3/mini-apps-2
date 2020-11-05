@@ -1,8 +1,9 @@
 import React from 'react';
 import HistoricalHeader from './HistoricalHeader.jsx';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate';
 import SearchBar from './SearchBar.jsx';
+import RecordsTable from './RecordsTable.jsx';
+import Paginator from './Paginator.jsx';
 
 class HistoricalFinder extends React.Component {
 
@@ -60,54 +61,18 @@ class HistoricalFinder extends React.Component {
   }
 
   render() {
-    const { tableData } = this.state;
+    const { tableData, pageCount } = this.state;
     return (
       <div>
         <HistoricalHeader />
         <SearchBar />
-        <table border="1">
-
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Lanuage</th>
-              <th>Category 1</th>
-              <th>Category 2</th>
-              <th>Granularity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              tableData.map((record, index) => (
-                <tr key={index}>
-                  <td>{record.date}</td>
-                  <td>{record.description}</td>
-                  <td>{record.lang}</td>
-                  <td>{record.category1}</td>
-                  <td>{record.category2}</td>
-                  <td>{record.granularity}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-
-        </table>
-
-        <ReactPaginate
-          previousLabel={'prev'}
-          nextLabel={'next'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={this.state.pageCount}
-          marginPagesDisplayed={3}
-          pageRangeDisplayed={2}
-          onPageChange={this.handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages-pagination'}
-          activeClassName={'active'}
+        <RecordsTable
+          tableData={tableData}
         />
-
+        <Paginator
+          pageCount={pageCount}
+          handlePageClick={this.handlePageClick}
+        />
       </div>
     );
   }
