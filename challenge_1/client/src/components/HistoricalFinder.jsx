@@ -15,17 +15,13 @@ class HistoricalFinder extends React.Component {
     };
     this.getHistoryBySearch = this.getHistoryBySearch.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  handleSearchChange(event) {
-    this.setState({
-      searchTerm: event.target.value
-    });
-  }
   getHistoryBySearch() {
     event.preventDefault();
     const { searchTerm } = this.state;
-    axios.get(`http://localhost:3000/events?q=${searchTerm}&_page=1&_limit=10`)
+    axios.get(`${url}?q=${searchTerm}&_page=1&_limit=10`)
       .then((searchResults) => {
         this.setState({
           tableData: searchResults.data,
@@ -35,13 +31,19 @@ class HistoricalFinder extends React.Component {
   }
 
   handlePageChange(event) {
-    axios.get(`http://localhost:3000/events?q=${this.state.searchTerm}&_page=${event.selected + 1}&_limit=10`)
+    axios.get(`${url}?q=${this.state.searchTerm}&_page=${event.selected + 1}&_limit=10`)
       .then((searchResults) => {
         this.setState({
           tableData: searchResults.data,
         });
       })
       .catch((err) => console.log(err));
+  }
+
+  handleSearchChange(event) {
+    this.setState({
+      searchTerm: event.target.value
+    });
   }
 
   render() {
