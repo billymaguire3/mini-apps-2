@@ -1,77 +1,72 @@
 import React from 'react';
 import HistoricalHeader from './HistoricalHeader.jsx';
 import axios from 'axios';
-import SearchBar from './SearchBar.jsx';
 import RecordsTable from './RecordsTable.jsx';
 import Paginator from './Paginator.jsx';
 
-class HistoricalFinder extends React.Component {
+const url = 'http://localhost:3000/events';
 
+class HistoricalFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      offset: 0,
       tableData: [],
-      orgtableData: [],
-      perPage: 10,
-      currentPage: 0,
-      pageCount: 0,
+      searchTerm: '',
     };
-    this.getHistory = this.getHistory.bind(this);
-    this.handlePageClick = this.handlePageClick.bind(this);
-    this.loadMoreHistory = this.loadMoreHistory.bind(this);
+    this.getHistoryBySearch = this.getHistoryBySearch.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
-  componentDidMount() {
-    this.getHistory();
+  handleSearchChange(event) {
+    this.setState({
+      searchTerm: event.target.value
+    });
   }
-
-  getHistory() {
-    axios.get('http://localhost:3333/events')
-      .then((records) => {
-        let historicRecords = records.data;
-        let slicedHistoricRecords = historicRecords.slice(this.state.offest, this.state.offset + this.state.perPage);
+  getHistoryBySearch() {
+    event.preventDefault();
+    const { searchTerm } = this.state;
+    axios.get(`http://localhost:3000/events?q=${searchTerm}&_page=1&_limit=10`)
+      .then((searchResults) => {
         this.setState({
-          pageCount: Math.ceil(historicRecords.length / this.state.perPage),
-          orgtableData: records.data,
-          tableData: slicedHistoricRecords,
+          tableData: searchResults.data,
         });
       })
       .catch((err) => console.log(err));
   }
 
-  handlePageClick(event) {
-    const selectedPage = event.selected;
-    const newOffset = selectedPage * this.state.perPage;
-    this.setState({
-      currentPage: selectedPage,
-      offset: newOffset
-    }, () => {
-      this.loadMoreHistory();
-    });
-  }
-
-  loadMoreHistory() {
-    const historicRecords = this.state.orgtableData;
-    const slicedHistoricRecords = historicRecords.slice(this.state.offset, this.state.offset + this.state.perPage);
-    this.setState({
-      pageCount: Math.ceil(historicRecords.length / this.state.perPage),
-      tableData: slicedHistoricRecords
-    });
+  handlePageChange(event) {
+    axios.get(`http://localhost:3000/events?q=${this.state.searchTerm}&_page=${event.selected + 1}&_limit=10`)
+      .then((searchResults) => {
+        this.setState({
+          tableData: searchResults.data,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
-    const { tableData, pageCount } = this.state;
+    const { tableData, pageCount, searchTerm } = this.state;
     return (
       <div>
         <HistoricalHeader />
-        <SearchBar />
+        <div>
+          <form>
+            <label>
+              Search:
+              <input
+                type="text"
+                onChange={this.handleSearchChange}
+              />
+            </label>
+            <input type="submit" value="Submit Search History" onClick={this.getHistoryBySearch} />
+          </form>
+        </div>
         <RecordsTable
           tableData={tableData}
         />
         <Paginator
           pageCount={pageCount}
-          handlePageClick={this.handlePageClick}
+          handlePageChange={this.handlePageChange}
         />
       </div>
     );

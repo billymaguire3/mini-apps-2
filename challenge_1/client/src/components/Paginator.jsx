@@ -3,16 +3,17 @@ import ReactPaginate from 'react-paginate';
 
 class Paginator extends React.Component {
   render() {
+    const { pageCount, handlePageChange } = this.props;
     return (
       <ReactPaginate
         previousLabel={'prev'}
         nextLabel={'next'}
         breakLabel={'...'}
         breakClassName={'break-me'}
-        pageCount={this.props.pageCount}
+        pageCount={pageCount}
         marginPagesDisplayed={3}
         pageRangeDisplayed={2}
-        onPageChange={this.props.handlePageClick}
+        onPageChange={handlePageChange}
         containerClassName={'pagination'}
         subContainerClassName={'pages-pagination'}
         activeClassName={'active'}
