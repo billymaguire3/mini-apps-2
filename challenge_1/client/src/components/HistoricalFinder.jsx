@@ -2,10 +2,11 @@ import React from 'react';
 import HistoricalHeader from './HistoricalHeader.jsx';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
+import SearchBar from './SearchBar.jsx';
 
 class HistoricalFinder extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       offset: 0,
@@ -13,8 +14,11 @@ class HistoricalFinder extends React.Component {
       orgtableData: [],
       perPage: 10,
       currentPage: 0,
+      pageCount: 0,
     };
     this.getData = this.getData.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.loadMoreHistory = this.loadMoreHistory.bind(this);
   }
 
   componentDidMount() {
@@ -35,26 +39,48 @@ class HistoricalFinder extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  handlePageClick(event) {
+    const selectedPage = event.selected;
+    const newOffset = selectedPage * this.state.perPage;
+    this.setState({
+      currentPage: selectedPage,
+      offset: newOffset
+    }, () => {
+      this.loadMoreHistory();
+    });
+  }
+
+  loadMoreHistory() {
+    const historicRecords = this.state.orgtableData;
+    const slicedHistoricRecords = historicRecords.slice(this.state.offset, this.state.offset + this.state.perPage);
+    this.setState({
+      pageCount: Math.ceil(historicRecords.length / this.state.perPage),
+      tableData: slicedHistoricRecords
+    });
+  }
+
   render() {
     const { tableData } = this.state;
     return (
       <div>
         <HistoricalHeader />
-
+        <SearchBar />
         <table border="1">
 
           <thead>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Lanuage</th>
-            <th>Category 1</th>
-            <th>Category 2</th>
-            <th>Granularity</th>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Lanuage</th>
+              <th>Category 1</th>
+              <th>Category 2</th>
+              <th>Granularity</th>
+            </tr>
           </thead>
           <tbody>
             {
-              tableData.map((record) => (
-                <tr key={record.date}>
+              tableData.map((record, index) => (
+                <tr key={index}>
                   <td>{record.date}</td>
                   <td>{record.description}</td>
                   <td>{record.lang}</td>
@@ -67,6 +93,21 @@ class HistoricalFinder extends React.Component {
           </tbody>
 
         </table>
+
+        <ReactPaginate
+          previousLabel={'prev'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={this.state.pageCount}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={2}
+          onPageChange={this.handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages-pagination'}
+          activeClassName={'active'}
+        />
+
       </div>
     );
   }
