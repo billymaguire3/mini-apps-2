@@ -16,16 +16,16 @@ class HistoricalFinder extends React.Component {
       currentPage: 0,
       pageCount: 0,
     };
-    this.getData = this.getData.bind(this);
+    this.getHistory = this.getHistory.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.loadMoreHistory = this.loadMoreHistory.bind(this);
   }
 
   componentDidMount() {
-    this.getData();
+    this.getHistory();
   }
 
-  getData() {
+  getHistory() {
     axios.get('http://localhost:3333/events')
       .then((records) => {
         let historicRecords = records.data;
