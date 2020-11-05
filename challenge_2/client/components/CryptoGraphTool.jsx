@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import CryptoHeader from './CryptoHeader.jsx';
+import CryptoFooter from './CryptoFooter.jsx';
 
 class CryptoGraphTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
 
-    }
+    };
   }
 
   render() {
     return (
       <div>
-        <h1>Hello from CrytoGraphTool</h1>
+        <CryptoHeader />
+        <CryptoFooter />
       </div>
     );
   }
