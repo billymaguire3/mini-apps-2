@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import BowlingHeader from './BowlingHeader.jsx';
+import BowlingNumbers from './BowlingNumbers.jsx';
 
 class Bowling extends Component {
   render() {
     return (
       <div>
-        <p>Hello from Bowling.jsx</p>
+        <BowlingHeader />
+        <BowlingNumbers />
       </div>
     );
   }
