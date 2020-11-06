@@ -3,38 +3,15 @@ import { Line, Bar, Pie } from 'react-chartjs-2';
 
 
 class CryptoGraph extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-    this.generateDateLabels = this.generateDateLabels.bind(this);
-  }
-
-  generateDateLabels (priceList) {
-    const labels = [];
-    for (let date in priceList) {
-      labels.push(date);
-    }
-    return labels;
-  }
-
-  generatePriceArray(priceList) {
-    const prices = [];
-    for (let date in priceList) {
-      let price = priceList[date];
-      prices.push(price);
-    }
-    return prices;
-  }
-
   render() {
+    const dateStorage = Object.keys(this.props.bitCoinPrices);
+    const priceStorage = Object.values(this.props.bitCoinPrices);
     const graphData = {
-      labels: this.generateDateLabels(this.props.bitCoinPrices),
+      labels: dateStorage,
       datasets: [
         {
           label: 'Price USD',
-          data: this.generatePriceArray(this.props.bitCoinPrices),
+          data: priceStorage,
           backgroundColor: '#004f15'
         }
       ]
@@ -51,12 +28,12 @@ class CryptoGraph extends Component {
             legend: {
               display: true,
               position: 'right'
-            }
+            },
+            height: '500px',
           }}
         />
       </div>
     );
   }
 }
-
 export default CryptoGraph;
