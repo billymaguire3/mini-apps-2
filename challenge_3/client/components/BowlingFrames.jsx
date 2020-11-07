@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import frames from '../FramesInfo';
 import styled from 'styled-components';
 
-const FrameNumber = styled.th`
+const FrameNumberRow = styled.th`
   width: 50px;
 `;
 
@@ -10,11 +10,18 @@ const FirstFrame = styled.div`
   display: inline;
   float: left;
   border-right: 2px solid darkgray;
-  padding-right: 1em;
+  // padding-right: 1em;
+  width: 24px;
+  height: 19px;
 `;
-const SecondFrame = styled.div`
-  display: inline;
+const SecondFrame = styled(FirstFrame)`
   float: right;
+  border: none;
+`;
+
+const ScoreRowCell = styled.div`
+  width: 54px;
+  height: 21px;
 `;
 
 class BowlingFrames extends Component {
@@ -31,7 +38,7 @@ class BowlingFrames extends Component {
           <thead>
             <tr>{
               frames.map((frame, index) => (
-                <FrameNumber key={index}>{frame.number}</FrameNumber>
+                <FrameNumberRow key={index}>{frame.number}</FrameNumberRow>
               ))
             }</tr>
           </thead>
@@ -39,8 +46,15 @@ class BowlingFrames extends Component {
             <tr>{
               frames.map((frame, index) => (
                 <td key={index}>
-                  <FirstFrame>{frame.frameOne}</FirstFrame>
-                  <SecondFrame>{frame.frameTwo}</SecondFrame>
+                  <FirstFrame></FirstFrame>
+                  <SecondFrame></SecondFrame>
+                </td>
+              ))
+            }</tr>
+            <tr>{
+              frames.map((frame, index) => (
+                <td key={index}>
+                  <ScoreRowCell></ScoreRowCell>
                 </td>
               ))
             }</tr>
