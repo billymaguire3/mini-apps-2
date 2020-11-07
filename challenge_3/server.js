@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/test', (req, res) => res.send('Hello Test from Server'));
-
 app.listen(PORT, () => {
   console.log(`Bowling App Listening at http://localhost:${PORT}`);
 });

@@ -10,7 +10,6 @@ const FirstFrame = styled.div`
   display: inline;
   float: left;
   border-right: 2px solid darkgray;
-  // padding-right: 1em;
   width: 24px;
   height: 19px;
 `;
@@ -28,7 +27,7 @@ class BowlingFrames extends Component {
   render() {
     return (
       <div>
-        <h3>scoreboard</h3>
+        <h3>scorecard</h3>
         <table
           style={{
             marginLeft: 'auto',
