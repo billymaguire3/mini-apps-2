@@ -4,25 +4,14 @@ import BowlingNumbers from './BowlingNumbers.jsx';
 import BowlingFrames from './BowlingFrames.jsx';
 
 class Bowling extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rollValue: '',
-    };
-  }
-
   render() {
-    const { rollValue } = this.state;
     return (
       <div>
         <BowlingHeader />
         <div style={{
           textAlign: 'center'
         }}>
-          <BowlingNumbers
-            rollValue={rollValue}
-            handlePinsEntryChange={this.handlePinsEntryChange}
-          />
+          <BowlingNumbers />
         </div>
       </div>
     );

@@ -9,25 +9,25 @@ class BowlingNumbers extends Component {
     this.state = {
       rollValue: ''
     };
+    this.handlePinsEntryChange = this.handlePinsEntryChange.bind(this);
   }
 
-  handlePinsEntryChange(event) {
-    console.log(e);
-    // this.setState({
-    //   rollValue: event.target.value
-    // });
+  handlePinsEntryChange(enteredValue) {
+    if (enteredValue >= 0 && enteredValue <= 10) {
+      this.setState({rollValue: enteredValue});
+    } else {
+      alert('Please enter a number between 0 and 10');
+    }
   }
 
   render() {
-    const { rollValue, handlePinsEntryChange } = this.props;
     return (
       <div>
         <NumPad.Number
-          onChange={(value) => { this.setState({rollValue: value}); }}
+          onChange={(value) => { this.handlePinsEntryChange(value); }}
           label={'Pins Hit'}
           inline='true'
           placeholder={'Enter # of Pins Hit'}
-          // value={100}
           decimal={0}
         />
         <BowlingFrames />

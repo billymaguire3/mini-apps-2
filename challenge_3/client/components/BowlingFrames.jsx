@@ -5,15 +5,18 @@ import styled from 'styled-components';
 const FrameNumberRow = styled.th`
   width: 50px;
 `;
+const FrameNumberTen = styled(FrameNumberRow)`
+  width: 75px;
+`;
 
-const FirstFrame = styled.div`
+const RollOneResult = styled.div`
   display: inline;
   float: left;
   border-right: 2px solid darkgray;
   width: 24px;
   height: 19px;
 `;
-const SecondFrame = styled(FirstFrame)`
+const RollTwoResult = styled(RollOneResult)`
   float: right;
   border: none;
 `;
@@ -45,8 +48,8 @@ class BowlingFrames extends Component {
             <tr>{
               frames.map((frame, index) => (
                 <td key={index}>
-                  <FirstFrame></FirstFrame>
-                  <SecondFrame></SecondFrame>
+                  <RollOneResult></RollOneResult>
+                  <RollTwoResult></RollTwoResult>
                 </td>
               ))
             }</tr>
