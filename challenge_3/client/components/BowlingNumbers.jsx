@@ -15,7 +15,7 @@ class BowlingNumbers extends Component {
           inline='true'
           placeholder={'Enter # of Pins Hit'}
           // value={100}
-          decimal={2}
+          decimal={0}
         />
       </div>
     );

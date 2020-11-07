@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BowlingHeader from './BowlingHeader.jsx';
 import BowlingNumbers from './BowlingNumbers.jsx';
-import Scoreboard from './Scoreboard.jsx';
 import BowlingFrames from './BowlingFrames.jsx';
 
 class Bowling extends Component {
@@ -15,7 +14,6 @@ class Bowling extends Component {
         <div style={{
           textAlign: 'center'
         }}>
-          <Scoreboard />
           <BowlingFrames />
           <BowlingNumbers />
         </div>

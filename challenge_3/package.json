@@ -21,7 +21,8 @@
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-numpad": "^5.1.1",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
