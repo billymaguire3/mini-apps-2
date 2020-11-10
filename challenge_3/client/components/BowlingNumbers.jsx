@@ -7,7 +7,6 @@ class BowlingNumbers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rollValue: '',
       scores: [],
     };
     this.handlePinsEntryChange = this.handlePinsEntryChange.bind(this);
@@ -19,12 +18,10 @@ class BowlingNumbers extends Component {
   }
 
   handlePinsEntryChange(enteredValue) {
-    //   if (enteredValue >= 0 && enteredValue <= 10) {
-    //     console.log(enteredValue);
-    //     this.state.scores.push(enteredValue);
-    //   }
     if (enteredValue >= 0 && enteredValue <= 10) {
-      this.setState({rollValue: enteredValue}, () => this.addScores(this.state.rollValue));
+      this.setState({
+        scores: [...this.state.scores, enteredValue]
+      });
     } else {
       alert('Please enter a number between 0 and 10');
     }
@@ -40,7 +37,7 @@ class BowlingNumbers extends Component {
           placeholder={'Enter # of Pins Hit'}
           decimal={0}
         />
-        <BowlingFrames />
+        <BowlingFrames scores={this.state.scores}/>
       </div>
     );
   }

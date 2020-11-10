@@ -27,7 +27,21 @@ const ScoreRowCell = styled.div`
 `;
 
 class BowlingFrames extends Component {
+
   render() {
+    const { scores } = this.props;
+    const framesArray = [
+      [scores[0], scores[1]],
+      [scores[2], scores[3]],
+      [scores[4], scores[5]],
+      [scores[6], scores[7]],
+      [scores[8], scores[9]],
+      [scores[10], scores[11]],
+      [scores[12], scores[13]],
+      [scores[14], scores[15]],
+      [scores[16], scores[17]],
+      [scores[18], scores[19]],
+    ];
     return (
       <div>
         <h3>scorecard</h3>
@@ -46,10 +60,10 @@ class BowlingFrames extends Component {
           </thead>
           <tbody>
             <tr>{
-              frames.map((frame, index) => (
+              framesArray.map((frame, index) => (
                 <td key={index}>
-                  <RollOneResult></RollOneResult>
-                  <RollTwoResult></RollTwoResult>
+                  <RollOneResult>{frame[0]}</RollOneResult>
+                  <RollTwoResult>{frame[1]}</RollTwoResult>
                 </td>
               ))
             }</tr>
