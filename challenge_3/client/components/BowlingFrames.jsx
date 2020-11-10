@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import frames from '../FramesInfo';
 import styled from 'styled-components';
 
 const FrameNumberRow = styled.th`
@@ -29,11 +28,13 @@ const ScoreRowCell = styled.div`
 class BowlingFrames extends Component {
   constructor(props) {
     super(props);
+    const { frames } = this.props;
     this.scoreHandler = this.scoreHandler.bind(this);
   }
 
   scoreHandler(score1, score2, index) {
     if (Number(score1) === 10) {
+      frames[index].frameScore = 10;
       return (
         <td key={index}>
           <RollOneResult>X</RollOneResult>
@@ -41,6 +42,7 @@ class BowlingFrames extends Component {
         </td>
       );
     } else if ((Number(score1) + Number(score2)) === 10) {
+      frames[index].frameScore = 10;
       return (
         <td key={index}>
           <RollOneResult>{score1}</RollOneResult>
@@ -48,6 +50,7 @@ class BowlingFrames extends Component {
         </td>
       );
     } else {
+      frames[index].frameScore = Number(score1) + Number(score2);
       return (
         <td key={index}>
           <RollOneResult>{score1}</RollOneResult>
@@ -97,7 +100,7 @@ class BowlingFrames extends Component {
             <tr>{
               frames.map((frame, index) => (
                 <td key={index}>
-                  <ScoreRowCell></ScoreRowCell>
+                  <ScoreRowCell>{frame.frameScore}</ScoreRowCell>
                 </td>
               ))
             }</tr>

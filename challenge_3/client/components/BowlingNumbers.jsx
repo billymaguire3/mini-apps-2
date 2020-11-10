@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import regeneratorRuntime from 'regenerator-runtime';
 import NumPad from 'react-numpad';
 import BowlingFrames from './BowlingFrames.jsx';
+import frames from '../FramesInfo';
 
 class BowlingNumbers extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class BowlingNumbers extends Component {
           placeholder={'Enter # of Pins Hit'}
           decimal={0}
         />
-        <BowlingFrames scores={scores}/>
+        <BowlingFrames scores={scores} frames={frames}/>
       </div>
     );
   }
