@@ -1,47 +1,44 @@
 export default frames = [
   {
     number: 1,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 2,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 3,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 4,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 5,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 6,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 7,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 8,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 9,
-    frameScore: 0
+    frameScore: ''
   },
   {
     number: 10,
-    frameScore: 0
+    frameScore: ''
   },
 ];
 
-// isNaN(frame.frameScore) ? <ScoreRowCell></ScoreRowCell> :
-// <td key={index}>
-//   <ScoreRowCell>{frame.frameScore}</ScoreRowCell>
-// </td>;
+

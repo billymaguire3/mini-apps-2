@@ -34,7 +34,7 @@ class BowlingFrames extends Component {
 
   scoreHandler(score1, score2, index) {
     if (Number(score1) === 10) {
-      frames[index].frameScore = 10;
+      frames[index].frameScore = (10).toString();
       return (
         <td key={index}>
           <RollOneResult>X</RollOneResult>
@@ -42,7 +42,7 @@ class BowlingFrames extends Component {
         </td>
       );
     } else if ((Number(score1) + Number(score2)) === 10) {
-      frames[index].frameScore = 10;
+      frames[index].frameScore = (10).toString();
       return (
         <td key={index}>
           <RollOneResult>{score1}</RollOneResult>
@@ -50,7 +50,7 @@ class BowlingFrames extends Component {
         </td>
       );
     } else {
-      frames[index].frameScore = Number(score1) + Number(score2);
+      frames[index].frameScore = (Number(score1) + Number(score2)).toString();
       return (
         <td key={index}>
           <RollOneResult>{score1}</RollOneResult>
@@ -112,3 +112,9 @@ class BowlingFrames extends Component {
 }
 
 export default BowlingFrames;
+
+
+// isNaN(frame.frameScore) ? <ScoreRowCell></ScoreRowCell> :
+// <td key={index}>
+//   <ScoreRowCell>{frame.frameScore}</ScoreRowCell>
+// </td>;
