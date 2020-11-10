@@ -27,6 +27,35 @@ const ScoreRowCell = styled.div`
 `;
 
 class BowlingFrames extends Component {
+  constructor(props) {
+    super(props);
+    this.scoreHandler = this.scoreHandler.bind(this);
+  }
+
+  scoreHandler(score1, score2, index) {
+    if (Number(score1) === 10) {
+      return (
+        <td key={index}>
+          <RollOneResult>X</RollOneResult>
+          <RollTwoResult> </RollTwoResult>
+        </td>
+      );
+    } else if ((Number(score1) + Number(score2)) === 10) {
+      return (
+        <td key={index}>
+          <RollOneResult>{score1}</RollOneResult>
+          <RollTwoResult>/</RollTwoResult>
+        </td>
+      );
+    } else {
+      return (
+        <td key={index}>
+          <RollOneResult>{score1}</RollOneResult>
+          <RollTwoResult>{score2}</RollTwoResult>
+        </td>
+      );
+    }
+  }
 
   render() {
     const { scores } = this.props;
@@ -60,12 +89,10 @@ class BowlingFrames extends Component {
           </thead>
           <tbody>
             <tr>{
-              framesArray.map((frame, index) => (
-                <td key={index}>
-                  <RollOneResult>{frame[0]}</RollOneResult>
-                  <RollTwoResult>{frame[1]}</RollTwoResult>
-                </td>
-              ))
+              framesArray.map((frame, index) => {
+                const frameScores = this.scoreHandler(frame[0], frame[1], index);
+                return frameScores;
+              })
             }</tr>
             <tr>{
               frames.map((frame, index) => (

@@ -28,6 +28,12 @@ class BowlingNumbers extends Component {
   }
 
   render() {
+    const { scores } = this.state;
+    for (let i = 0; i < scores.length; i++) {
+      if (scores[i] === '10') {
+        scores[i + 1] = undefined;
+      }
+    }
     return (
       <div>
         <NumPad.Number
@@ -37,7 +43,7 @@ class BowlingNumbers extends Component {
           placeholder={'Enter # of Pins Hit'}
           decimal={0}
         />
-        <BowlingFrames scores={this.state.scores}/>
+        <BowlingFrames scores={scores}/>
       </div>
     );
   }
